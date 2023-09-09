@@ -18,7 +18,6 @@ test.describe('WordCamp TDD Demo', () => {
 
 		// Then
 		const tddNotice = await admin.page.waitForSelector('body [data-testid="wctdd-notice"]');
-		console.log('=-====', tddNotice);
 		expect(tddNotice).not.toBeNull();
 
 		// @ts-ignore

@@ -41,44 +41,17 @@ jobs:
           dependency-versions: "lowest"
           custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
 
-      - name: Docker debug information
-        run: |
-            docker -v
-            docker-compose -v
-
-      - name: General debug information
-        run: |
-            npm --version
-            node --version
-            curl --version
-            git --version
-            svn --version
-            locale -a
-
       - name: Start Docker environment
         run: npm run wp-env start
 
       - name: Log running Docker containers
         run: docker ps -a
 
-      - name: Docker container debug information
-        run: |
-            npm run wp-env run tests-mysql mysql -- --version
-            npm run wp-env run tests-wordpress php -- --version
-            npm run wp-env run tests-wordpress php -m
-            npm run wp-env run tests-wordpress php -i
-            npm run wp-env run tests-wordpress wp-content/plugins/myplugin/vendor/bin/phpunit -- --version
-            npm run wp-env run tests-wordpress locale -a
-
       - name: Running single site unit tests
-        if: ${{ ! matrix.multisite }}
         run: |
-            set -o pipefail
-            npm run test:unit:php | tee phpunit.log
+            npm run test:unit:php
 
       - name: Running single site e2e tests
-        if: ${{ ! matrix.multisite }}
         run: |
-            set -o pipefail
-            npx playwright install
-            npm run test:e2e | tee e2e.log
+            npx playwright install chromium
+            npm run test:e2e
