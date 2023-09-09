@@ -14,12 +14,12 @@ test.describe('WordCamp TDD Demo', () => {
 	});
 
 	test('Tdd notice is displayed in the admin area', async ({ admin }) => {
+		// Given
 		await admin.visitAdminPage('index.php');
 
 		// Then
 		const tddNotice = await admin.page.waitForSelector('body [data-testid="wctdd-notice"]');
 		expect(tddNotice).not.toBeNull();
-
 		// @ts-ignore
 		const noticeText = await tddNotice.innerText();
 		expect(noticeText).toContain("Let's go green with TDD");;
