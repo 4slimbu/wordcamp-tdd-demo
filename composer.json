@@ -1,0 +1,13 @@
+{
+  "name": "sudip/wordcamp-tdd-demo",
+  "authors": [
+    {
+      "name": "Sudip Limbu",
+      "email": "4slimbu@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.0",
+    "yoast/phpunit-polyfills": "^2.0"
+  }
+}
